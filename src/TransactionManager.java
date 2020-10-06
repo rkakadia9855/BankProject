@@ -61,7 +61,7 @@ public class TransactionManager {
         quit = true;
       }
       else {
-        System.out.println("Invalid Command!");
+        System.out.println("Command \'"+command+"' not supported!");
         sc.nextLine();
       }
     }

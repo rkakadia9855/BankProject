@@ -36,5 +36,14 @@ public class Savings extends Account {
 		}
 		return fee;
 	}
+	
+	@Override
+    public boolean equals(Account account) {
+      if((account instanceof Savings) && super.getHolder().equals(account.getHolder()) &&
+          (super.getDateOpen().compareTo(account.getDateOpen()) == 0))
+        return true;
+      else 
+        return false;
+    }
 
 }

@@ -1,6 +1,6 @@
 public abstract class Account {
   
- private Profile holder;
+    private Profile holder;
 	private double balance;
 	private Date dateOpen;
 	
@@ -18,7 +18,13 @@ public abstract class Account {
 		this.balance = balance;
 	}
 	
+	public Profile getHolder() {
+	  return this.holder;
+	}
 	
+	public Date getDateOpen() {
+	  return this.dateOpen;
+	}
 	
 	public void debit(double amount) { 
 		balance -= amount;
@@ -30,7 +36,7 @@ public abstract class Account {
 	
 	public String toString() { 
 		
-		 String name = holder.toString();
+		String name = holder.toString();
 		
 		String date = dateOpen.toString();
 		
@@ -41,6 +47,14 @@ public abstract class Account {
 	    String account = "*"+ name + "* " + formattedBalance + "*" + date + "*";
 		
 		return account;
+	}
+
+	public boolean equals(Account account) {
+	  if((account instanceof Account) && (this.holder.equals(account.getHolder())) && 
+	      (this.dateOpen.compareTo(account.getDateOpen()) == 0) )
+	    return true;
+	  else 
+	    return false;
 	}
 	
 	public abstract double monthlyInterest();

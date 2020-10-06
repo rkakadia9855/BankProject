@@ -7,4 +7,19 @@ public class Profile {
       this.fname = fname;
       this.lname = lname;
     }
+    
+    public String getFName() {
+      return this.fname;
+    }
+    
+    public String getLName() {
+      return this.lname;
+    }
+    
+    public boolean equals(String fname, String lname) {
+      if(this.fname == fname && this.lname == lname)
+        return true;
+      else 
+        return false;
+    }
 }
