@@ -191,106 +191,230 @@ public class TransactionManager {
         }
       }
       else if(command.equals("CC")) {
-        fname = sc.next();
-        lname = sc.next();
+        //fname = sc.next();
+        //lname = sc.next();
+        if(tokenizeLine.countTokens() != 2) {
+          System.out.println("Input data type mismatch.");
+          continue;
+        }
+        fname = tokenizeLine.nextToken();
+        lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        db.remove(new Checking(holder, 0.0, null));
+        boolean accountRemoved = db.remove(new Checking(holder, 0.0, null));
+        if(!accountRemoved) {
+          System.out.println("Account does not exist.");
+        }
+        else {
+          System.out.println("Account closed and removed from the database.");
+        }
       }
       else if(command.equals("CS")) {
-        fname = sc.next();
-        lname = sc.next();
+        //fname = sc.next();
+        //lname = sc.next();
+        if(tokenizeLine.countTokens() != 2) {
+          System.out.println("Input data type mismatch.");
+          continue;
+        }
+        fname = tokenizeLine.nextToken();
+        lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        db.remove(new Savings(holder, 0.0, null));
+        boolean accountRemoved = db.remove(new Savings(holder, 0.0, null));
+        if(!accountRemoved) {
+          System.out.println("Account does not exist.");
+        }
+        else {
+          System.out.println("Account closed and removed from the database.");
+        }
       }
       else if(command.equals("CM")) {
-        fname = sc.next();
-        lname = sc.next();
+        //fname = sc.next();
+        //lname = sc.next();
+        if(tokenizeLine.countTokens() != 2) {
+          System.out.println("Input data type mismatch.");
+          continue;
+        }
+        fname = tokenizeLine.nextToken();
+        lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        db.remove(new MoneyMarket(holder, 0.0, null));
+        boolean accountRemoved = db.remove(new MoneyMarket(holder, 0.0, null));
+        if(!accountRemoved) {
+          System.out.println("Account does not exist.");
+        }
+        else {
+          System.out.println("Account closed and removed from the database.");
+        }
       }
       else if(command.equals("DC")) {
-        fname = sc.next();
-        lname = sc.next();
+      //fname = sc.next();
+        //lname = sc.next();
+        if(tokenizeLine.countTokens() != 3) {
+          System.out.println("Input data type mismatch.");
+          continue;
+        }
+        fname = tokenizeLine.nextToken();
+        lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        String dAmount = sc.next();
+       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-          amount = Double.parseDouble(dAmount);
+       //   amount = Double.parseDouble(dAmount);
+          amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
           System.out.println();
         }
-        db.deposit(new Checking(holder, 0, null), amount);
+        boolean depositSuccessful = db.deposit(new Checking(holder, 0, null), amount);
+        if(depositSuccessful) {
+          System.out.println(amount + " deposited to account.");
+        }
+        else {
+          System.out.println("Account does not exist.");
+        }
       }
       else if(command.equals("DS")) {
-        fname = sc.next();
-        lname = sc.next();
+      //fname = sc.next();
+        //lname = sc.next();
+        if(tokenizeLine.countTokens() != 3) {
+          System.out.println("Input data type mismatch.");
+          continue;
+        }
+        fname = tokenizeLine.nextToken();
+        lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        String dAmount = sc.next();
+       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-          amount = Double.parseDouble(dAmount);
+       //   amount = Double.parseDouble(dAmount);
+          amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
           System.out.println();
         }
-        db.deposit(new Savings(holder, 0, null), amount);
+        boolean depositSuccessful = db.deposit(new Savings(holder, 0, null), amount);
+        if(depositSuccessful) {
+          System.out.println(amount + " deposited to account.");
+        }
+        else {
+          System.out.println("Account does not exist.");
+        }
       }
       else if(command.equals("DM")) {
-        fname = sc.next();
-        lname = sc.next();
+      //fname = sc.next();
+        //lname = sc.next();
+        if(tokenizeLine.countTokens() != 3) {
+          System.out.println("Input data type mismatch.");
+          continue;
+        }
+        fname = tokenizeLine.nextToken();
+        lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        String dAmount = sc.next();
+       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-          amount = Double.parseDouble(dAmount);
+       //   amount = Double.parseDouble(dAmount);
+          amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
           System.out.println();
         }
-        db.deposit(new MoneyMarket(holder, 0, null), amount);
+        boolean depositSuccessful = db.deposit(new MoneyMarket(holder, 0, null), amount);
+        if(depositSuccessful) {
+          System.out.println(amount + " deposited to account.");
+        }
+        else {
+          System.out.println("Account does not exist.");
+        }
       }
       else if(command.equals("WC")) {
-        fname = sc.next();
-        lname = sc.next();
+      //fname = sc.next();
+        //lname = sc.next();
+        if(tokenizeLine.countTokens() != 3) {
+          System.out.println("Input data type mismatch.");
+          continue;
+        }
+        fname = tokenizeLine.nextToken();
+        lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        String dAmount = sc.next();
+       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-          amount = Double.parseDouble(dAmount);
+       //   amount = Double.parseDouble(dAmount);
+          amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
-          System.out.println();
+          System.out.println("Input data type mismatch.");
         }
-        db.withdrawal(new Checking(holder, 0, null), amount);
+        int withdrawn = db.withdrawal(new Checking(holder, 0, null), amount);
+        if(withdrawn == 0) {
+          System.out.println(amount + " withdrawn from account.");
+        }
+        else if(withdrawn == -1) {
+          System.out.println("Account does not exist.");
+        }
+        else if(withdrawn == 1) {
+          System.out.println("Insufficient funds.");
+        }
       }
       else if(command.equals("WS")) {
-        fname = sc.next();
-        lname = sc.next();
+      //fname = sc.next();
+        //lname = sc.next();
+        if(tokenizeLine.countTokens() != 3) {
+          System.out.println("Input data type mismatch.");
+          continue;
+        }
+        fname = tokenizeLine.nextToken();
+        lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        String dAmount = sc.next();
+       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-          amount = Double.parseDouble(dAmount);
+       //   amount = Double.parseDouble(dAmount);
+          amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
-          System.out.println();
+          System.out.println("Input data type mismatch.");
         }
-        db.withdrawal(new Savings(holder, 0, null), amount);
+        int withdrawn = db.withdrawal(new Savings(holder, 0, null), amount);
+        if(withdrawn == 0) {
+          System.out.println(amount + " withdrawn from account.");
+        }
+        else if(withdrawn == -1) {
+          System.out.println("Account does not exist.");
+        }
+        else if(withdrawn == 1) {
+          System.out.println("Insufficient funds.");
+        }
       }
       else if(command.equals("WM")) {
-        fname = sc.next();
-        lname = sc.next();
+      //fname = sc.next();
+        //lname = sc.next();
+        if(tokenizeLine.countTokens() != 3) {
+          System.out.println("Input data type mismatch.");
+          continue;
+        }
+        fname = tokenizeLine.nextToken();
+        lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        String dAmount = sc.next();
+       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-          amount = Double.parseDouble(dAmount);
+       //   amount = Double.parseDouble(dAmount);
+          amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
-          System.out.println();
+          System.out.println("Input data type mismatch.");
         }
-        db.withdrawal(new MoneyMarket(holder, 0, null), amount);
+        int withdrawn = db.withdrawal(new MoneyMarket(holder, 0, null), amount);
+        if(withdrawn == 0) {
+          System.out.println(amount + " withdrawn from account.");
+          
+        }
+        else if(withdrawn == -1) {
+          System.out.println("Account does not exist.");
+        }
+        else if(withdrawn == 1) {
+          System.out.println("Insufficient funds.");
+        }
       }
       else if(command.equals("PA")) {
         db.printAccounts();

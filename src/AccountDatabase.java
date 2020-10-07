@@ -88,13 +88,28 @@ public class AccountDatabase {
     int accountIndex = find(account);
     if(accountIndex == -1)
       return accountIndex;
-    else if(amount > account.getBalance())
+    else if(amount > accounts[accountIndex].getBalance()) {
       return 1;
+    }
     else {
-      account.debit(amount);
+      accounts[accountIndex].debit(amount);
     }
     
     return withdrawalStatus;
+  }
+  
+  private double calcInterest(Account account) {
+    double interest = 0.0;
+    interest = account.monthlyInterest() * account.getBalance();
+    return interest;
+  }
+  
+  private double newBalance(Account account) {
+    double updatedBalance = 0.0;
+    updatedBalance = account.getBalance() + this.calcInterest(account);
+    updatedBalance = updatedBalance - account.monthlyFee();
+    account.setBalance(updatedBalance);
+    return updatedBalance;
   }
     
 //sort in ascending order
@@ -131,16 +146,37 @@ public class AccountDatabase {
   } 
     
   public void printByDateOpen() {
-    sortByDateOpen();
-    for(int i = 0; i < size; i++) {
-      System.out.println(accounts[i].toString());
+    if(size != 0) {
+      System.out.println("--Printing statements by date opened--");
+      sortByDateOpen();
+      for(int i = 0; i < size; i++) {
+        System.out.println();
+        System.out.println(accounts[i].toString());
+        System.out.println("-interest: $ "+this.calcInterest(accounts[i]));
+        System.out.println("-fee: $ "+ accounts[i].monthlyFee());
+        System.out.println("-new balance: $ "+this.newBalance(accounts[i]));
+      }
+      System.out.println("--end of printing--");
+    }
+    else {
+      System.out.println("Database is empty.");
     }
   }
     
   public void printByLastName() { 
-    sortByLastName();
-    for(int i = 0; i < size; i++) {
-      System.out.println(accounts[i].toString());
+    if(size != 0) {
+      System.out.println("--Printing statements by last name--");
+      sortByLastName();
+      for(int i = 0; i < size; i++) {
+        System.out.println(accounts[i].toString());
+        System.out.println("-interest: $ "+this.calcInterest(accounts[i]));
+        System.out.println("-fee: $ "+ accounts[i].monthlyFee());
+        System.out.println("-new balance: $ "+this.newBalance(accounts[i]));
+      }
+      System.out.println("--end of printing--");
+    }
+    else {
+      System.out.println("Database is empty.");
     }
   }
     

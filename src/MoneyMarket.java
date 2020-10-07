@@ -13,6 +13,12 @@ public class MoneyMarket extends Account {
 	public void setWithdrawals(int withdrawals) {
 		this.withdrawals = withdrawals;
 	}
+	
+	@Override
+	public void debit(double amount) { 
+      super.setBalance((super.getBalance() - amount));
+      this.withdrawals++;
+  } //decrease the balance by amount
 
 	@Override
 	public double monthlyInterest() {
