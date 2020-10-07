@@ -4,7 +4,7 @@ public class MoneyMarket extends Account {
 
 	public MoneyMarket(Profile holder, double balance, Date dateOpen) {
 		super(holder, balance, dateOpen);
-		
+		this.withdrawals = 0;
 	}
 	
 	public int getWithdrawals() {
@@ -31,11 +31,27 @@ public class MoneyMarket extends Account {
 
 	@Override
     public boolean equals(Account account) {
-      if((account instanceof MoneyMarket) && super.getHolder().equals(account.getHolder()) &&
-          (super.getDateOpen().compareTo(account.getDateOpen()) == 0))
+      if((account instanceof MoneyMarket) && super.getHolder().equals(account.getHolder()))
         return true;
       else 
         return false;
     }
+	
+	   @Override
+	    public String toString() { 
+	      
+	      String name = super.getHolder().toString();
+	      
+	      String date = super.getDateOpen().toString();
+	      
+	      Double[] someVal = new Double[1];
+	      someVal[0] = new Double(super.getBalance());
+	      String formattedBalance = String.format("%.2f", someVal); 
+	      
+	      String account = "*MoneyMarket*"+ name + "* $" + formattedBalance + "*" + date + "*";
+	      account = account + this.getWithdrawals() + " withdrawals*";
+	      
+	      return account;
+	  }
 
 }

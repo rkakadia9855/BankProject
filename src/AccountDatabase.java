@@ -130,9 +130,30 @@ public class AccountDatabase {
     }
   } 
     
-  public void printByDateOpen() { }
+  public void printByDateOpen() {
+    sortByDateOpen();
+    for(int i = 0; i < size; i++) {
+      System.out.println(accounts[i].toString());
+    }
+  }
     
-  public void printByLastName() { }
+  public void printByLastName() { 
+    sortByLastName();
+    for(int i = 0; i < size; i++) {
+      System.out.println(accounts[i].toString());
+    }
+  }
     
-  public void printAccounts() { }
+  public void printAccounts() { 
+    if(size != 0) {
+      System.out.println("--Listing accounts in the database--");
+      for(int i = 0; i < size; i++) {
+        System.out.println(accounts[i].toString());
+      }
+      System.out.println("--end of listing--");
+    }
+    else {
+      System.out.println("Database is empty.");
+    }
+  }
 }

@@ -39,11 +39,29 @@ public class Savings extends Account {
 	
 	@Override
     public boolean equals(Account account) {
-      if((account instanceof Savings) && super.getHolder().equals(account.getHolder()) &&
-          (super.getDateOpen().compareTo(account.getDateOpen()) == 0))
+      if((account instanceof Savings) && super.getHolder().equals(account.getHolder()))
         return true;
       else 
         return false;
     }
+	
+	   @Override
+	    public String toString() { 
+	      
+	      String name = super.getHolder().toString();
+	      
+	      String date = super.getDateOpen().toString();
+	      
+	      Double[] someVal = new Double[1];
+	      someVal[0] = new Double(super.getBalance());
+	      String formattedBalance = String.format("%.2f", someVal); 
+	      
+	      String account = "*Savings*"+ name + "* $" + formattedBalance + "*" + date + "*";
+	      if(this.isLoyal()) {
+	        account = account + "special Savings account*";
+	      }
+	      
+	      return account;
+	  }
 
 }

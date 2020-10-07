@@ -5,7 +5,7 @@ public class Date implements Comparable<Date> {
   private int month;
   private int day;
   
-  public Date(int day, int month, int year) {
+  public Date(int month, int day,  int year) {
     this.day = day;
     this.month = month;
     this.year = year;
@@ -82,17 +82,76 @@ public class Date implements Comparable<Date> {
   }
   
   public boolean isValid() {
-    boolean valid = false;
+    boolean valid = true;
     
     if(this.day == 0 || this.month == 0 || this.year == 0) 
-       valid = false;
-    else
-       valid = true;
-    
-    String temp = this.year + "";
-    if(temp.length() < 4) 
       valid = false;
+    else if(this.month == 2 && this.day > 28) {
+      valid = false;
+    }
+    else if(thirtyDays(this.month)) {
+      if(this.day > 30)
+        valid = false;
+    }
+    else if(thirtyOneDays(this.month)) {
+      if(this.day > 31)
+        valid = false;
+    }
+    else if(this.month > 12)
+      valid = false;
+    
     return valid;
+  }
+  
+  private boolean thirtyDays(int month) {
+    boolean thirty = false;
+    switch(month) {
+      case 4:
+        thirty = true;
+        break;
+      case 6:
+        thirty = true;
+        break;
+      case 9:
+        thirty = true;
+        break;
+      case 11:
+        thirty = true;
+        break;
+      default:
+        thirty = false;
+    }
+    return thirty;
+  }
+  
+  private boolean thirtyOneDays(int month) {
+    boolean thirty = false;
+    switch(month) {
+      case 1:
+        thirty = true;
+        break;
+      case 3:
+        thirty = true;
+        break;
+      case 5:
+        thirty = true;
+        break;
+      case 7:
+        thirty = true;
+        break;
+      case 8:
+        thirty = true;
+        break;
+      case 10:
+        thirty = true;
+        break;
+      case 12:
+        thirty = true;
+        break;
+      default:
+        thirty = false;
+    }
+    return thirty;
   }
 
 }

@@ -16,10 +16,26 @@ public class Profile {
       return this.lname;
     }
     
-    public boolean equals(String fname, String lname) {
-      if(this.fname == fname && this.lname == lname)
+    public String toString() {
+      return (fname + " " +lname);
+    }
+
+    public boolean equals(Profile holder) {
+      if(this.fname.equals(holder.fname) && this.lname.equals(holder.lname)) {
+        //System.out.println("equals in holder: holder is same");
         return true;
-      else 
+      }
+      else {
+       /* if(this.fname.equals(holder.fname)) {
+          System.out.println("equals in holder: fname diff");
+        }
+        else if(this.lname.equals(holder.lname)) {
+          System.out.println("equals in holder: lname is diff");
+        }
+        else {
+          System.out.println("no idea");
+        } */
         return false;
+      }
     }
 }

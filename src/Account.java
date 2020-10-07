@@ -50,8 +50,7 @@ public abstract class Account {
 	}
 
 	public boolean equals(Account account) {
-	  if((account instanceof Account) && (this.holder.equals(account.getHolder())) && 
-	      (this.dateOpen.compareTo(account.getDateOpen()) == 0) )
+	  if((account instanceof Account) && (this.holder.equals(account.getHolder())))
 	    return true;
 	  else 
 	    return false;
