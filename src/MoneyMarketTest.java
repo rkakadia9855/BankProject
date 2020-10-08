@@ -1,9 +1,16 @@
+/**
+ * the junit test case for money market class
+ * @author John Juarez, Rudra Kakadia
+ */
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class MoneyMarketTest {
 
   @Test
+  /**
+   * tests the monthly interest rate
+   */
   public void testMonthlyInterest() {
     MoneyMarket m1 = new MoneyMarket(new Profile("Rudra", "Kakadia"), 500, new Date(11, 15, 2020));
     double actualInterest = 0.0065/12;
@@ -12,6 +19,9 @@ public class MoneyMarketTest {
   }
 
   @Test
+  /**
+   * tests the monthly fee
+   */
   public void testMonthlyFee() {
     MoneyMarket m1 = new MoneyMarket(new Profile("Rudra", "Kakadia"), 500, new Date(11, 15, 2020));
     MoneyMarket m2 = new MoneyMarket(new Profile("John", "Juarez"), 3000, new Date(11, 15, 2020));

@@ -1,3 +1,7 @@
+/**
+ * This class represents the database of the bank where all the details about accounts is stored
+ * @author John Juarez, Rudra Kakadia
+ */
 import java.text.DecimalFormat;
 
 public class AccountDatabase {
@@ -6,11 +10,19 @@ public class AccountDatabase {
     
   private int size;
   
+  /**
+   * Initializes the accounts array and the size to 0
+   */
   public AccountDatabase() {
     this.size = 0;
     accounts = new Account[5];
   }
     
+  /**
+   * Finds the account in the parameter in the bank database
+   * @param account - the account that needs to be found
+   * @return - the index of the account in the array if found, -1 otherwise.
+   */
   private int find(Account account) {
     
     int i = 0;
@@ -25,6 +37,9 @@ public class AccountDatabase {
     return index;
   }
     
+  /**
+   * This is a helper method that grows the bank database by 5
+   */
   private void grow() { 
     Account[] temp = new Account[accounts.length + 5];
     int i = 0;
@@ -34,7 +49,11 @@ public class AccountDatabase {
     accounts = temp;
   }
     
-  //return false if account exists
+  /**
+   * This method is used to add an account to the account database
+   * @param account - the account that needs to be added to the database
+   * @return - true if account was added, false otherwise
+   */
   public boolean add(Account account) { 
     
     boolean canAddAccount = true;
@@ -60,7 +79,11 @@ public class AccountDatabase {
     return canAddAccount;
   } 
     
-  //return false if account doesn’t exist
+  /**
+   * Removes the account from the bank database
+   * @param account - the account that needs to be removed from the database
+   * @return - true if the account was removed, false otherwise
+   */
   public boolean remove(Account account) {
     boolean accountRemoved = false;
     int i = 0;
@@ -78,6 +101,12 @@ public class AccountDatabase {
     return accountRemoved;
   }
   
+  /**
+   * This method deposits some amount of money in the account that was passed as argument
+   * @param account - the account to which the money should be deposited
+   * @param amount - the amount that needs to be deposited
+   * @return - true if the amount was deposited, false otherwise
+   */
   public boolean deposit(Account account, double amount) { 
     boolean depositSuccessful = false;
     int accountIndex = find(account);
@@ -87,8 +116,13 @@ public class AccountDatabase {
     }
     return depositSuccessful;
   }
-    
-//return 0: withdrawal successful, 1: insufficient funds, -1 account doesn’t exist
+
+  /**
+   * Withdraws some amount of money from the account passed in the argument
+   * @param account - the account from which the money should be withdrawn
+   * @param amount - the amount that needs to be withdrawn
+   * @return -  0: withdrawal successful, 1: insufficient funds, -1 account doesn’t exist
+   */
   public int withdrawal(Account account, double amount) {
     int withdrawalStatus = 0;
     int accountIndex = find(account);
@@ -104,12 +138,22 @@ public class AccountDatabase {
     return withdrawalStatus;
   }
   
+  /**
+   * Calculates the interest that will be paid to this account
+   * @param account - the account for which the interest should be calculated
+   * @return - the amount of interest that needs to be paid to the customer
+   */
   private double calcInterest(Account account) {
     double interest = 0.0;
     interest = account.monthlyInterest() * account.getBalance();
     return interest;
   }
   
+  /**
+   * Updates the balance of the account after adding interest, and deducting monthly fee
+   * @param account - the account for which the balance needs to be updated
+   * @return - the amount of money in the bank after adding interest and deducting fee
+   */
   private double newBalance(Account account) {
     double updatedBalance = 0.0;
     updatedBalance = account.getBalance() + this.calcInterest(account);
@@ -118,7 +162,9 @@ public class AccountDatabase {
     return updatedBalance;
   }
     
-//sort in ascending order
+  /**
+   * Sorts the bank database array in ascending order of date opened
+   */
   private void sortByDateOpen() { 
     int n = accounts.length; 
     for (int i = 0; i < n-1; i++) {
@@ -134,7 +180,9 @@ public class AccountDatabase {
     }
   } 
     
-//sort in ascending order
+  /**
+   * Sorts the bank database array in ascending order of last name
+   */
   private void sortByLastName() { 
     int n = accounts.length; 
     for (int i = 0; i < n-1; i++) {
@@ -151,6 +199,9 @@ public class AccountDatabase {
     }
   } 
     
+  /**
+   * Prints the account statements in ascending order of date opened
+   */
   public void printByDateOpen() {
     if(size != 0) {
       System.out.println("--Printing statements by date opened--");
@@ -158,23 +209,11 @@ public class AccountDatabase {
       for(int i = 0; i < size; i++) {
         System.out.println();
         System.out.println(accounts[i].toString());
-      /*  Double[] calculatedInterest = new Double[1];
-        calculatedInterest[0] = new Double(this.calcInterest(accounts[i]));
-        String formattedInterest = String.format("%.2f", calculatedInterest); */
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
-      //  System.out.println("-interest: $ "+ formattedInterest);
         System.out.println("-interest: $ "+ formatter.format(this.calcInterest(accounts[i])));
-       /* Double[] fee = new Double[1];
-        fee[0] = new Double(accounts[i].monthlyFee());
-        String formattedFee = String.format("%.2f", fee);  */
         DecimalFormat feeFormatter = new DecimalFormat("#,##0.00");
-       // System.out.println("-fee: $ "+ formattedFee);
         System.out.println("-fee: $ "+ feeFormatter.format(accounts[i].monthlyFee()));
-        /*Double[] calculatedBalance = new Double[1];
-        calculatedBalance[0] = new Double(this.newBalance(accounts[i]));
-        String formattedBalance = String.format("%.2f", calculatedBalance);  */
         DecimalFormat balanceFormatter = new DecimalFormat("#,##0.00");
-        //System.out.println("-new balance: $ "+ formattedBalance);
         System.out.println("-new balance: $ "+ 
             balanceFormatter.format(this.newBalance(accounts[i])));
       }
@@ -185,29 +224,20 @@ public class AccountDatabase {
     }
   }
     
+  /**
+   * Prints the account statements in ascending order of last name
+   */
   public void printByLastName() { 
     if(size != 0) {
       System.out.println("--Printing statements by last name--");
       sortByLastName();
       for(int i = 0; i < size; i++) {
         System.out.println(accounts[i].toString());
-        /*  Double[] calculatedInterest = new Double[1];
-        calculatedInterest[0] = new Double(this.calcInterest(accounts[i]));
-        String formattedInterest = String.format("%.2f", calculatedInterest); */
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
-      //  System.out.println("-interest: $ "+ formattedInterest);
         System.out.println("-interest: $ "+ formatter.format(this.calcInterest(accounts[i])));
-       /* Double[] fee = new Double[1];
-        fee[0] = new Double(accounts[i].monthlyFee());
-        String formattedFee = String.format("%.2f", fee);  */
         DecimalFormat feeFormatter = new DecimalFormat("#,##0.00");
-       // System.out.println("-fee: $ "+ formattedFee);
         System.out.println("-fee: $ "+ feeFormatter.format(accounts[i].monthlyFee()));
-        /*Double[] calculatedBalance = new Double[1];
-        calculatedBalance[0] = new Double(this.newBalance(accounts[i]));
-        String formattedBalance = String.format("%.2f", calculatedBalance);  */
         DecimalFormat balanceFormatter = new DecimalFormat("#,##0.00");
-        //System.out.println("-new balance: $ "+ formattedBalance);
         System.out.println("-new balance: $ "+ 
             balanceFormatter.format(this.newBalance(accounts[i])));
       }
@@ -218,6 +248,9 @@ public class AccountDatabase {
     }
   }
     
+  /**
+   * Lists all the accounts in the bank database
+   */
   public void printAccounts() { 
     if(size != 0) {
       System.out.println("--Listing accounts in the database--");

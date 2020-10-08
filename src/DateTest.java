@@ -1,9 +1,16 @@
+/**
+ * the junit test case for date class
+ * @author John Juarez, Rudra Kakadia
+ */
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class DateTest {
 
   @Test
+  /**
+   * tests the isValid method
+   */
   public void testIsValid() {
     Date d1 = new Date(1, 31, 2000); //true
     Date d2 = new Date(2, 30, 2000); //false

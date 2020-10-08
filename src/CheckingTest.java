@@ -1,9 +1,16 @@
+/**
+ * the junit test case for checking class
+ * @author John Juarez, Rudra Kakadia
+ */
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class CheckingTest {
 
   @Test
+  /**
+   * tests the monthly interest rate
+   */
   public void testMonthlyInterest() {
     Checking c1 = new Checking(new Profile("John", "Juarez"), 500, new Date(11, 15, 2020));
     boolean correctInterest = (c1.monthlyInterest() == (0.0005/12));
@@ -11,6 +18,9 @@ public class CheckingTest {
   }
 
   @Test
+  /**
+   * tests the monthly fee
+   */
   public void testMonthlyFee() {
     Checking m1 = new Checking(new Profile("Rudra", "Kakadia"), 500, new Date(11, 15, 2020));
     Checking m2 = new Checking(new Profile("John", "Juarez"), 1600, new Date(11, 15, 2020));

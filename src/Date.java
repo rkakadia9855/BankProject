@@ -1,49 +1,67 @@
-
+/**
+ * This class represents the date on which the account is opened
+ * @author John Juarez, Rudra Kakadia
+ */
 public class Date implements Comparable<Date> {
   
   private int year;
   private int month;
   private int day;
   
+  /**
+   * Intializes the date fields
+   * @param month - the month on which account was opened
+   * @param day - the day on which account was opened
+   * @param year - the year on which account was opened
+   */
   public Date(int month, int day,  int year) {
     this.day = day;
     this.month = month;
     this.year = year;
   }
   
+  /**
+   * getter for the day on which account was opened
+   * @return - the day on which an account was opened
+   */
   public int getDay() {
     return this.day;
   }
   
+  /**
+   * getter for the month on which account was opened
+   * @return - the month on which an account was opened
+   */
   public int getMonth() {
     return this.month;
   }
   
+  /**
+   * getter for the year on which account was opened
+   * @return - the year on which an account was opened
+   */
   public int getYear() {
     return this.year;
   }
 
   @Override
+  /**
+   * Compares this date with the date passed in argument
+   * @param date - the date which needs to be compared with this date
+   * @return 0 is both dates are same, -1 if this date is before the passed date, 1 otherwise
+   */
   public int compareTo(Date date) {
     int result = 0;
-    
-    // check if the passed date is valid
-    
-    // all same:- return 0
     if((this.year == date.getYear()) && (this.month == date.getMonth()) 
         && (this.day == date.getDay())) {
       result = 0;
     }
-    // else if this year is greater than date year return 1
     else if(this.year > date.getYear()) {
       result = 1;
     }
-    // else if this year is less than date year return -1 
     else if(this.year < date.getYear()) {
       result = -1;
     }
-    // else if year is same
-    // do the above steps for month
     else {
       if(this.month > date.getMonth()) {
         result = 1;
@@ -52,7 +70,6 @@ public class Date implements Comparable<Date> {
         result = -1;
       }
       else {
-        //then for the day
         if(this.day > date.getDay()) {
           result = 1;
         }
@@ -65,40 +82,42 @@ public class Date implements Comparable<Date> {
     return result;
   }
   
+  /**
+   * This is a helper method that helps to decide if the passed year is a leap year
+   * @param year - the year that needs to be checked
+   * @return true if it is a leap year, false otherwise
+   */
   private boolean isLeapYear(int year) {
     boolean leap = false;
     
-    //leap year is a multiple of 400
     if(year % 400 == 0)
       return true;
-    
-    // if it is not multiple of 400, it shouldn't be a multiple of 100
     if (year % 100 == 0)
       return false;
-    
-    // if it is not multiple of 100, but is multiple of 4, the year is leap year
     if(year % 4 == 0)
       return true;
     
     return leap;
   }
   
+  /**
+   * Constructs the string representation of this date object
+   * @return the string format of this date
+   */
   public String toString() {
     String date = "";
     String dayString = this.day + "";
     String monthString = this.month + "";
     String yearString = this.year + "";
     
-    /*if(dayString.length() < 2) {
-      dayString = "0" + dayString;
-    }
-    if(monthString.length() < 2) {
-      monthString = "0" + monthString;
-    } */
     date = monthString + "/" + dayString + "/" + yearString;
     return date;
   }
   
+  /**
+   * Checks if this is a valid date
+   * @return true if is valid, false otherwise
+   */
   public boolean isValid() {
     boolean valid = true;
     
@@ -126,6 +145,11 @@ public class Date implements Comparable<Date> {
     return valid;
   }
   
+  /**
+   * checks if the given month has 30 days or not
+   * @param month - the month 
+   * @return true if it has 30 days, false otherwise
+   */
   private boolean thirtyDays(int month) {
     boolean thirty = false;
     switch(month) {
@@ -147,6 +171,11 @@ public class Date implements Comparable<Date> {
     return thirty;
   }
   
+  /**
+   * checks if the given month has 31 days or not
+   * @param month - the month 
+   * @return true if it has 31 days, false otherwise
+   */
   private boolean thirtyOneDays(int month) {
     boolean thirty = false;
     switch(month) {

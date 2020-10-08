@@ -1,9 +1,16 @@
+/**
+ * This class is the interface that the user will use to run this program
+ * @author John Juarez, Rudra Kakadia
+ */
 import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class TransactionManager {
 
+  /**
+   * the method that will run the program
+   */
   public void run() {
     String command = "";
     boolean quit = false;
@@ -24,27 +31,18 @@ public class TransactionManager {
     System.out.println("Transaction processing starts.....");
     
     while(!quit) {
-   //   System.out.println("taking input.");
       String holdLine = sc.nextLine();
-  //    System.out.println("Line was read.");
       tokenizeLine = new StringTokenizer(holdLine, " ");
       command = tokenizeLine.nextToken();
-      /*if(sc.hasNext()) {
-        command = sc.next();
-      } */
       if(command.equals("OC")) {
         if(tokenizeLine.countTokens() != 5) {
           System.out.println("Input data type mismatch.");
           continue;
         }
-        /*fname = sc.next();
-        lname = sc.next(); */
         fname = tokenizeLine.nextToken();
         lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        //balanceString = sc.next();
         balanceString = tokenizeLine.nextToken();
-       // dateString = sc.next();
         dateString = tokenizeLine.nextToken();
         tokenizeDate = new StringTokenizer(dateString, "/");
         int month = 0, day = 0, year = 0;
@@ -62,7 +60,6 @@ public class TransactionManager {
           System.out.println(dateString + " is not a valid date!");
           continue;
         }
-        //lastArg = sc.nextBoolean();
         String tempBool = tokenizeLine.nextToken();
         tempBool = tempBool.toLowerCase();
         if(tempBool.equals("true"))
@@ -94,14 +91,10 @@ public class TransactionManager {
           System.out.println("Input data type mismatch.");
           continue;
         }
-        /*fname = sc.next();
-        lname = sc.next(); */
         fname = tokenizeLine.nextToken();
         lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        //balanceString = sc.next();
         balanceString = tokenizeLine.nextToken();
-       // dateString = sc.next();
         dateString = tokenizeLine.nextToken();
         tokenizeDate = new StringTokenizer(dateString, "/");
         int month = 0, day = 0, year = 0;
@@ -119,7 +112,6 @@ public class TransactionManager {
           System.out.println(dateString + " is not a valid date!");
           continue;
         }
-        //lastArg = sc.nextBoolean();
         String tempBool = tokenizeLine.nextToken();
         tempBool = tempBool.toLowerCase();
         if(tempBool.equals("true"))
@@ -151,14 +143,10 @@ public class TransactionManager {
           System.out.println("Input data type mismatch.");
           continue;
         }
-        /*fname = sc.next();
-        lname = sc.next(); */
         fname = tokenizeLine.nextToken();
         lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-        //balanceString = sc.next();
         balanceString = tokenizeLine.nextToken();
-       // dateString = sc.next();
         dateString = tokenizeLine.nextToken();
         tokenizeDate = new StringTokenizer(dateString, "/");
         int month = 0, day = 0, year = 0;
@@ -192,8 +180,6 @@ public class TransactionManager {
         }
       }
       else if(command.equals("CC")) {
-        //fname = sc.next();
-        //lname = sc.next();
         if(tokenizeLine.countTokens() != 2) {
           System.out.println("Input data type mismatch.");
           continue;
@@ -210,8 +196,6 @@ public class TransactionManager {
         }
       }
       else if(command.equals("CS")) {
-        //fname = sc.next();
-        //lname = sc.next();
         if(tokenizeLine.countTokens() != 2) {
           System.out.println("Input data type mismatch.");
           continue;
@@ -228,8 +212,6 @@ public class TransactionManager {
         }
       }
       else if(command.equals("CM")) {
-        //fname = sc.next();
-        //lname = sc.next();
         if(tokenizeLine.countTokens() != 2) {
           System.out.println("Input data type mismatch.");
           continue;
@@ -246,8 +228,6 @@ public class TransactionManager {
         }
       }
       else if(command.equals("DC")) {
-      //fname = sc.next();
-        //lname = sc.next();
         if(tokenizeLine.countTokens() != 3) {
           System.out.println("Input data type mismatch.");
           continue;
@@ -255,10 +235,8 @@ public class TransactionManager {
         fname = tokenizeLine.nextToken();
         lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-       //   amount = Double.parseDouble(dAmount);
           amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
@@ -266,12 +244,8 @@ public class TransactionManager {
           continue;
         }
         boolean depositSuccessful = db.deposit(new Checking(holder, 0, null), amount);
-       /* Double[] amountDeposited = new Double[1];
-        amountDeposited[0] = new Double(amount);
-        String formattedAmount = String.format("%.2f", amountDeposited);  */
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(depositSuccessful) {
-          //System.out.println(formattedAmount + " deposited to account.");
           System.out.println(formatter.format(amount) + " deposited to account.");
         }
         else {
@@ -279,8 +253,6 @@ public class TransactionManager {
         }
       }
       else if(command.equals("DS")) {
-      //fname = sc.next();
-        //lname = sc.next();
         if(tokenizeLine.countTokens() != 3) {
           System.out.println("Input data type mismatch.");
           continue;
@@ -288,10 +260,8 @@ public class TransactionManager {
         fname = tokenizeLine.nextToken();
         lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-       //   amount = Double.parseDouble(dAmount);
           amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
@@ -299,12 +269,8 @@ public class TransactionManager {
           continue;
         }
         boolean depositSuccessful = db.deposit(new Savings(holder, 0, null), amount);
-      /*  Double[] amountDeposited = new Double[1];
-        amountDeposited[0] = new Double(amount);
-        String formattedAmount = String.format("%.2f", amountDeposited); */
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(depositSuccessful) {
-        //  System.out.println(formattedAmount + " deposited to account.");
           System.out.println(formatter.format(amount) + " deposited to account.");
         }
         else {
@@ -312,8 +278,6 @@ public class TransactionManager {
         }
       }
       else if(command.equals("DM")) {
-      //fname = sc.next();
-        //lname = sc.next();
         if(tokenizeLine.countTokens() != 3) {
           System.out.println("Input data type mismatch.");
           continue;
@@ -321,10 +285,8 @@ public class TransactionManager {
         fname = tokenizeLine.nextToken();
         lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-       //   amount = Double.parseDouble(dAmount);
           amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
@@ -332,12 +294,8 @@ public class TransactionManager {
           continue;
         }
         boolean depositSuccessful = db.deposit(new MoneyMarket(holder, 0, null), amount);
-       /* Double[] amountDeposited = new Double[1];
-        amountDeposited[0] = new Double(amount);
-        String formattedAmount = String.format("%.2f", amountDeposited); */
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(depositSuccessful) {
-          //System.out.println(formattedAmount + " deposited to account.");
           System.out.println(formatter.format(amount) + " deposited to account.");
         }
         else {
@@ -345,8 +303,6 @@ public class TransactionManager {
         }
       }
       else if(command.equals("WC")) {
-      //fname = sc.next();
-        //lname = sc.next();
         if(tokenizeLine.countTokens() != 3) {
           System.out.println("Input data type mismatch.");
           continue;
@@ -354,10 +310,8 @@ public class TransactionManager {
         fname = tokenizeLine.nextToken();
         lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-       //   amount = Double.parseDouble(dAmount);
           amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
@@ -365,12 +319,8 @@ public class TransactionManager {
           continue;
         }
         int withdrawn = db.withdrawal(new Checking(holder, 0, null), amount);
-       /* Double[] amountWithdrawn = new Double[1];
-        amountWithdrawn[0] = new Double(amount);
-        String formattedAmount = String.format("%.2f", amountWithdrawn); */
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(withdrawn == 0) {
-         // System.out.println(formattedAmount + " withdrawn from account.");
           System.out.println(formatter.format(amount) + " withdrawn from account.");
         }
         else if(withdrawn == -1) {
@@ -381,8 +331,6 @@ public class TransactionManager {
         }
       }
       else if(command.equals("WS")) {
-      //fname = sc.next();
-        //lname = sc.next();
         if(tokenizeLine.countTokens() != 3) {
           System.out.println("Input data type mismatch.");
           continue;
@@ -390,10 +338,8 @@ public class TransactionManager {
         fname = tokenizeLine.nextToken();
         lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-       //   amount = Double.parseDouble(dAmount);
           amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
@@ -401,12 +347,8 @@ public class TransactionManager {
           continue;
         }
         int withdrawn = db.withdrawal(new Savings(holder, 0, null), amount);
-        /*Double[] amountWithdrawn = new Double[1];
-        amountWithdrawn[0] = new Double(amount);
-        String formattedAmount = String.format("%.2f", amountWithdrawn); */
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(withdrawn == 0) {
-        //  System.out.println(formattedAmount + " withdrawn from account.");
           System.out.println(formatter.format(amount) + " withdrawn from account.");
         }
         else if(withdrawn == -1) {
@@ -417,8 +359,6 @@ public class TransactionManager {
         }
       }
       else if(command.equals("WM")) {
-      //fname = sc.next();
-        //lname = sc.next();
         if(tokenizeLine.countTokens() != 3) {
           System.out.println("Input data type mismatch.");
           continue;
@@ -426,10 +366,8 @@ public class TransactionManager {
         fname = tokenizeLine.nextToken();
         lname = tokenizeLine.nextToken();
         holder = new Profile(fname, lname);
-       // String dAmount = sc.next();
         double amount = 0.0;
         try {
-       //   amount = Double.parseDouble(dAmount);
           amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
@@ -437,12 +375,8 @@ public class TransactionManager {
           continue;
         }
         int withdrawn = db.withdrawal(new MoneyMarket(holder, 0, null), amount);
-       /* Double[] amountWithdrawn = new Double[1];
-        amountWithdrawn[0] = new Double(amount);
-        String formattedAmount = String.format("%.2f", amountWithdrawn); */
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(withdrawn == 0) {
-        //  System.out.println(formattedAmount + " withdrawn from account.");
           System.out.println(formatter.format(amount) + " withdrawn from account.");
         }
         else if(withdrawn == -1) {
