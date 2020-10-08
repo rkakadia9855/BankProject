@@ -110,6 +110,8 @@ public class Date implements Comparable<Date> {
     else if(this.month == 2 && this.day <= 29 && isLeapYear(year)) {
       valid = true;
     }
+    else if(this.month == 2 && this.day > 28)
+      valid = false;
     else if(thirtyDays(this.month)) {
       if(this.day > 30)
         valid = false;

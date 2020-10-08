@@ -23,8 +23,13 @@ public class Checking extends Account {
 	@Override
 	public double monthlyFee() {
 		double fee = 0;
-		if(!directDeposit || super.getBalance() < 1500) {
-			fee = 25;
+		if(super.getBalance() < 1500) {
+		  if(!directDeposit) {
+		    fee = 25;
+		  }
+		  else {
+		    fee = 0;
+		  }
 		}
 		return fee;
 	}
