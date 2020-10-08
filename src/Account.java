@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+
 public abstract class Account {
   
     private Profile holder;
@@ -40,17 +42,19 @@ public abstract class Account {
 		
 		String date = dateOpen.toString();
 		
-		Double[] someVal = new Double[1];
+		/*Double[] someVal = new Double[1];
 	    someVal[0] = new Double(balance);
-	    String formattedBalance = String.format("%.2f", someVal); 
+	    String formattedBalance = String.format("%.2f", someVal); */
 	    
-	    String account = "*"+ name + "* " + formattedBalance + "*" + date + "*";
+	    DecimalFormat formatter = new DecimalFormat("#,##0.00");
+	    
+	    String account = name + "* $" + formatter.format(balance) + "*" + date;
 		
 		return account;
 	}
 
 	public boolean equals(Account account) {
-	  if((account instanceof Account) && (this.holder.equals(account.getHolder())))
+	  if(this.holder.equals(account.getHolder()))
 	    return true;
 	  else 
 	    return false;

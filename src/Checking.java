@@ -31,37 +31,20 @@ public class Checking extends Account {
 	
 	@Override
 	public boolean equals(Account account) {
-      if((account instanceof Checking) && super.getHolder().equals(account.getHolder())) {
-      //  System.out.println("equals in checking. account is same");
+      if((account instanceof Checking) && super.equals(account)) {
         return true;
       }
       else {
-       /* if(!(account instanceof Checking)) {
-          System.out.println("equals in checking. account is not instance of checking");
-        }
-        else if(!(super.getHolder().equals(account.getHolder()))){
-          System.out.println(super.getHolder().toString());
-          System.out.println(account.getHolder());
-          System.out.println("equals in checking. Holder is not same");
-        } */
         return false;
       }
     }
 	
 	@Override
 	public String toString() { 
-      
-      String name = super.getHolder().toString();
-      
-      String date = super.getDateOpen().toString();
-      
-      Double[] someVal = new Double[1];
-      someVal[0] = new Double(super.getBalance());
-      String formattedBalance = String.format("%.2f", someVal); 
-      
-      String account = "*Checking*"+ name + "* $" + formattedBalance + "*" + date + "*";
+
+      String account = "*Checking*"+ super.toString();
       if(this.isDirectDeposit()) {
-        account = account + "direct deposit account*";
+        account = account + "*direct deposit account*";
       }
       
       return account;

@@ -37,27 +37,18 @@ public class MoneyMarket extends Account {
 
 	@Override
     public boolean equals(Account account) {
-      if((account instanceof MoneyMarket) && super.getHolder().equals(account.getHolder()))
+      if((account instanceof MoneyMarket) && super.equals(account))
         return true;
       else 
         return false;
     }
 	
-	   @Override
-	    public String toString() { 
-	      
-	      String name = super.getHolder().toString();
-	      
-	      String date = super.getDateOpen().toString();
-	      
-	      Double[] someVal = new Double[1];
-	      someVal[0] = new Double(super.getBalance());
-	      String formattedBalance = String.format("%.2f", someVal); 
-	      
-	      String account = "*MoneyMarket*"+ name + "* $" + formattedBalance + "*" + date + "*";
-	      account = account + this.getWithdrawals() + " withdrawals*";
-	      
-	      return account;
-	  }
+	@Override
+    public String toString() { 
+      String account = "*Money Market*"+ super.toString() + "*";
+      account = account + this.getWithdrawals() + " withdrawals*";
+      
+      return account;
+    }
 
 }

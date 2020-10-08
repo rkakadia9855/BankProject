@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 
 public class AccountDatabase {
     
@@ -47,6 +48,11 @@ public class AccountDatabase {
     }
 
     if(size < accounts.length) {
+      accounts[size] = account;
+      size++;
+    }
+    else {
+      grow();
       accounts[size] = account;
       size++;
     }
@@ -118,7 +124,7 @@ public class AccountDatabase {
     for (int i = 0; i < n-1; i++) {
         for (int j = 0; j < n-i-1; j++) {
           if(accounts[j] != null && accounts[j+1] != null) {
-            if (accounts[j].getDateOpen().compareTo(accounts[j+1].getDateOpen()) > 1) { 
+            if (accounts[j].getDateOpen().compareTo(accounts[j+1].getDateOpen()) >= 0) { 
                 Account temp = accounts[j]; 
                 accounts[j] = accounts[j+1]; 
                 accounts[j+1] = temp; 
@@ -135,7 +141,7 @@ public class AccountDatabase {
         for (int j = 0; j < n-i-1; j++) {
           if(accounts[j] != null && accounts[j+1] != null) {
             if (accounts[j].getHolder().getLName().compareTo(
-                accounts[j+1].getHolder().getLName()) > 1) { 
+                accounts[j+1].getHolder().getLName()) >= 0) { 
                 Account temp = accounts[j]; 
                 accounts[j] = accounts[j+1]; 
                 accounts[j+1] = temp; 
@@ -152,9 +158,25 @@ public class AccountDatabase {
       for(int i = 0; i < size; i++) {
         System.out.println();
         System.out.println(accounts[i].toString());
-        System.out.println("-interest: $ "+this.calcInterest(accounts[i]));
-        System.out.println("-fee: $ "+ accounts[i].monthlyFee());
-        System.out.println("-new balance: $ "+this.newBalance(accounts[i]));
+      /*  Double[] calculatedInterest = new Double[1];
+        calculatedInterest[0] = new Double(this.calcInterest(accounts[i]));
+        String formattedInterest = String.format("%.2f", calculatedInterest); */
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
+      //  System.out.println("-interest: $ "+ formattedInterest);
+        System.out.println("-interest: $ "+ formatter.format(this.calcInterest(accounts[i])));
+       /* Double[] fee = new Double[1];
+        fee[0] = new Double(accounts[i].monthlyFee());
+        String formattedFee = String.format("%.2f", fee);  */
+        DecimalFormat feeFormatter = new DecimalFormat("#,##0.00");
+       // System.out.println("-fee: $ "+ formattedFee);
+        System.out.println("-fee: $ "+ feeFormatter.format(accounts[i].monthlyFee()));
+        /*Double[] calculatedBalance = new Double[1];
+        calculatedBalance[0] = new Double(this.newBalance(accounts[i]));
+        String formattedBalance = String.format("%.2f", calculatedBalance);  */
+        DecimalFormat balanceFormatter = new DecimalFormat("#,##0.00");
+        //System.out.println("-new balance: $ "+ formattedBalance);
+        System.out.println("-new balance: $ "+ 
+            balanceFormatter.format(this.newBalance(accounts[i])));
       }
       System.out.println("--end of printing--");
     }
@@ -169,9 +191,25 @@ public class AccountDatabase {
       sortByLastName();
       for(int i = 0; i < size; i++) {
         System.out.println(accounts[i].toString());
-        System.out.println("-interest: $ "+this.calcInterest(accounts[i]));
-        System.out.println("-fee: $ "+ accounts[i].monthlyFee());
-        System.out.println("-new balance: $ "+this.newBalance(accounts[i]));
+        /*  Double[] calculatedInterest = new Double[1];
+        calculatedInterest[0] = new Double(this.calcInterest(accounts[i]));
+        String formattedInterest = String.format("%.2f", calculatedInterest); */
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
+      //  System.out.println("-interest: $ "+ formattedInterest);
+        System.out.println("-interest: $ "+ formatter.format(this.calcInterest(accounts[i])));
+       /* Double[] fee = new Double[1];
+        fee[0] = new Double(accounts[i].monthlyFee());
+        String formattedFee = String.format("%.2f", fee);  */
+        DecimalFormat feeFormatter = new DecimalFormat("#,##0.00");
+       // System.out.println("-fee: $ "+ formattedFee);
+        System.out.println("-fee: $ "+ feeFormatter.format(accounts[i].monthlyFee()));
+        /*Double[] calculatedBalance = new Double[1];
+        calculatedBalance[0] = new Double(this.newBalance(accounts[i]));
+        String formattedBalance = String.format("%.2f", calculatedBalance);  */
+        DecimalFormat balanceFormatter = new DecimalFormat("#,##0.00");
+        //System.out.println("-new balance: $ "+ formattedBalance);
+        System.out.println("-new balance: $ "+ 
+            balanceFormatter.format(this.newBalance(accounts[i])));
       }
       System.out.println("--end of printing--");
     }

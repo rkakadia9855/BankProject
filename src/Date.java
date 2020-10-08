@@ -65,18 +65,36 @@ public class Date implements Comparable<Date> {
     return result;
   }
   
+  private boolean isLeapYear(int year) {
+    boolean leap = false;
+    
+    //leap year is a multiple of 400
+    if(year % 400 == 0)
+      return true;
+    
+    // if it is not multiple of 400, it shouldn't be a multiple of 100
+    if (year % 100 == 0)
+      return false;
+    
+    // if it is not multiple of 100, but is multiple of 4, the year is leap year
+    if(year % 4 == 0)
+      return true;
+    
+    return leap;
+  }
+  
   public String toString() {
     String date = "";
     String dayString = this.day + "";
     String monthString = this.month + "";
     String yearString = this.year + "";
     
-    if(dayString.length() < 2) {
+    /*if(dayString.length() < 2) {
       dayString = "0" + dayString;
     }
     if(monthString.length() < 2) {
       monthString = "0" + monthString;
-    }
+    } */
     date = monthString + "/" + dayString + "/" + yearString;
     return date;
   }
@@ -86,8 +104,11 @@ public class Date implements Comparable<Date> {
     
     if(this.day == 0 || this.month == 0 || this.year == 0) 
       valid = false;
-    else if(this.month == 2 && this.day > 28) {
+    else if(this.month == 2 && this.day > 28 && !(isLeapYear(year))) {
       valid = false;
+    }
+    else if(this.month == 2 && this.day <= 29 && isLeapYear(year)) {
+      valid = true;
     }
     else if(thirtyDays(this.month)) {
       if(this.day > 30)

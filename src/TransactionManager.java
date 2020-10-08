@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -261,11 +262,17 @@ public class TransactionManager {
           amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
-          System.out.println();
+          System.out.println("Input data type mismatch.");
+          continue;
         }
         boolean depositSuccessful = db.deposit(new Checking(holder, 0, null), amount);
+       /* Double[] amountDeposited = new Double[1];
+        amountDeposited[0] = new Double(amount);
+        String formattedAmount = String.format("%.2f", amountDeposited);  */
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(depositSuccessful) {
-          System.out.println(amount + " deposited to account.");
+          //System.out.println(formattedAmount + " deposited to account.");
+          System.out.println(formatter.format(amount) + " deposited to account.");
         }
         else {
           System.out.println("Account does not exist.");
@@ -288,11 +295,17 @@ public class TransactionManager {
           amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
-          System.out.println();
+          System.out.println("Input data type mismatch.");
+          continue;
         }
         boolean depositSuccessful = db.deposit(new Savings(holder, 0, null), amount);
+      /*  Double[] amountDeposited = new Double[1];
+        amountDeposited[0] = new Double(amount);
+        String formattedAmount = String.format("%.2f", amountDeposited); */
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(depositSuccessful) {
-          System.out.println(amount + " deposited to account.");
+        //  System.out.println(formattedAmount + " deposited to account.");
+          System.out.println(formatter.format(amount) + " deposited to account.");
         }
         else {
           System.out.println("Account does not exist.");
@@ -315,11 +328,17 @@ public class TransactionManager {
           amount = Double.parseDouble(tokenizeLine.nextToken());
         }
         catch(NumberFormatException e) {
-          System.out.println();
+          System.out.println("Input data type mismatch.");
+          continue;
         }
         boolean depositSuccessful = db.deposit(new MoneyMarket(holder, 0, null), amount);
+       /* Double[] amountDeposited = new Double[1];
+        amountDeposited[0] = new Double(amount);
+        String formattedAmount = String.format("%.2f", amountDeposited); */
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(depositSuccessful) {
-          System.out.println(amount + " deposited to account.");
+          //System.out.println(formattedAmount + " deposited to account.");
+          System.out.println(formatter.format(amount) + " deposited to account.");
         }
         else {
           System.out.println("Account does not exist.");
@@ -343,10 +362,16 @@ public class TransactionManager {
         }
         catch(NumberFormatException e) {
           System.out.println("Input data type mismatch.");
+          continue;
         }
         int withdrawn = db.withdrawal(new Checking(holder, 0, null), amount);
+       /* Double[] amountWithdrawn = new Double[1];
+        amountWithdrawn[0] = new Double(amount);
+        String formattedAmount = String.format("%.2f", amountWithdrawn); */
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(withdrawn == 0) {
-          System.out.println(amount + " withdrawn from account.");
+         // System.out.println(formattedAmount + " withdrawn from account.");
+          System.out.println(formatter.format(amount) + " withdrawn from account.");
         }
         else if(withdrawn == -1) {
           System.out.println("Account does not exist.");
@@ -373,10 +398,16 @@ public class TransactionManager {
         }
         catch(NumberFormatException e) {
           System.out.println("Input data type mismatch.");
+          continue;
         }
         int withdrawn = db.withdrawal(new Savings(holder, 0, null), amount);
+        /*Double[] amountWithdrawn = new Double[1];
+        amountWithdrawn[0] = new Double(amount);
+        String formattedAmount = String.format("%.2f", amountWithdrawn); */
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(withdrawn == 0) {
-          System.out.println(amount + " withdrawn from account.");
+        //  System.out.println(formattedAmount + " withdrawn from account.");
+          System.out.println(formatter.format(amount) + " withdrawn from account.");
         }
         else if(withdrawn == -1) {
           System.out.println("Account does not exist.");
@@ -403,11 +434,16 @@ public class TransactionManager {
         }
         catch(NumberFormatException e) {
           System.out.println("Input data type mismatch.");
+          continue;
         }
         int withdrawn = db.withdrawal(new MoneyMarket(holder, 0, null), amount);
+       /* Double[] amountWithdrawn = new Double[1];
+        amountWithdrawn[0] = new Double(amount);
+        String formattedAmount = String.format("%.2f", amountWithdrawn); */
+        DecimalFormat formatter = new DecimalFormat("#,##0.00");
         if(withdrawn == 0) {
-          System.out.println(amount + " withdrawn from account.");
-          
+        //  System.out.println(formattedAmount + " withdrawn from account.");
+          System.out.println(formatter.format(amount) + " withdrawn from account.");
         }
         else if(withdrawn == -1) {
           System.out.println("Account does not exist.");
@@ -434,5 +470,6 @@ public class TransactionManager {
         continue;
       }
     }
+    sc.close();
   }
 }
