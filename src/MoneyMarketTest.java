@@ -13,8 +13,8 @@ public class MoneyMarketTest {
    */
   public void testMonthlyInterest() {
     MoneyMarket m1 = new MoneyMarket(new Profile("Rudra", "Kakadia"), 500, new Date(11, 15, 2020));
-    double actualInterest = 0.0065/12;
-    boolean correctInterest = (m1.monthlyInterest() == actualInterest);
+    Double actualInterest = new Double (0.0065/12);
+    boolean correctInterest = (actualInterest.equals(new Double(m1.monthlyInterest())));
     assertTrue(correctInterest);
   }
 
@@ -29,12 +29,12 @@ public class MoneyMarketTest {
     MoneyMarket m4 = new MoneyMarket(new Profile("Other", "Person"), 200, new Date(11, 15, 2020));
     m3.setWithdrawals(7);
     m4.setWithdrawals(10);
-    double fee = 12.00;
-    double waived = 0.00;
-    assertTrue((m1.monthlyFee() == fee));
-    assertTrue((m2.monthlyFee() == waived));
-    assertTrue((m3.monthlyFee() == fee));
-    assertTrue((m4.monthlyFee() == fee));
+    Double fee = new Double(12.00);
+    Double waived = new Double(0.0);
+    assertTrue(fee.equals(new Double(m1.monthlyFee())));
+    assertTrue(waived.equals(new Double(m2.monthlyFee())));
+    assertTrue(fee.equals(new Double(m3.monthlyFee())));
+    assertTrue(fee.equals(new Double(m4.monthlyFee())));
   }
 
 }

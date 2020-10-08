@@ -167,16 +167,19 @@ public class AccountDatabase {
    */
   private void sortByDateOpen() { 
     int n = accounts.length; 
-    for (int i = 0; i < n-1; i++) {
-        for (int j = 0; j < n-i-1; j++) {
-          if(accounts[j] != null && accounts[j+1] != null) {
-            if (accounts[j].getDateOpen().compareTo(accounts[j+1].getDateOpen()) >= 0) { 
-                Account temp = accounts[j]; 
-                accounts[j] = accounts[j+1]; 
-                accounts[j+1] = temp; 
-            } 
+    
+    for(int i = 0; i < n-1; i++) {
+      int minIndex = i;
+      for(int j = i+1; j < n; j++) {
+        if(accounts[j] != null) {
+          if(accounts[j].getDateOpen().compareTo(accounts[minIndex].getDateOpen()) < 0) {
+            minIndex = j;
           }
         }
+      }
+      Account tempAcc = accounts[minIndex];
+      accounts[minIndex] = accounts[i];
+      accounts[i] = tempAcc;
     }
   } 
     
@@ -185,17 +188,21 @@ public class AccountDatabase {
    */
   private void sortByLastName() { 
     int n = accounts.length; 
-    for (int i = 0; i < n-1; i++) {
-        for (int j = 0; j < n-i-1; j++) {
-          if(accounts[j] != null && accounts[j+1] != null) {
-            if (accounts[j].getHolder().getLName().compareTo(
-                accounts[j+1].getHolder().getLName()) >= 0) { 
-                Account temp = accounts[j]; 
-                accounts[j] = accounts[j+1]; 
-                accounts[j+1] = temp; 
-            } 
+    
+    
+    for(int i = 0; i < n-1; i++) {
+      int minIndex = i;
+      for(int j = i+1; j < n; j++) {
+        if(accounts[j] != null) {
+          if(accounts[j].getHolder().getLName().
+              compareTo(accounts[minIndex].getHolder().getLName()) < 0) {
+            minIndex = j;
           }
         }
+      }
+      Account tempAcc = accounts[minIndex];
+      accounts[minIndex] = accounts[i];
+      accounts[i] = tempAcc;
     }
   } 
     
@@ -204,10 +211,11 @@ public class AccountDatabase {
    */
   public void printByDateOpen() {
     if(size != 0) {
+      System.out.println("");
       System.out.println("--Printing statements by date opened--");
       sortByDateOpen();
       for(int i = 0; i < size; i++) {
-        System.out.println();
+        System.out.println("");
         System.out.println(accounts[i].toString());
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
         System.out.println("-interest: $ "+ formatter.format(this.calcInterest(accounts[i])));
@@ -229,9 +237,11 @@ public class AccountDatabase {
    */
   public void printByLastName() { 
     if(size != 0) {
+      System.out.println("");
       System.out.println("--Printing statements by last name--");
       sortByLastName();
       for(int i = 0; i < size; i++) {
+        System.out.println("");
         System.out.println(accounts[i].toString());
         DecimalFormat formatter = new DecimalFormat("#,##0.00");
         System.out.println("-interest: $ "+ formatter.format(this.calcInterest(accounts[i])));
